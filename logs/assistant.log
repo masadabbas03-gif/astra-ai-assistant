@@ -1,0 +1,1007 @@
+
+
+=================================
+
+[2026-07-18 09:47:33.134202]
+
+User:
+
+search asad
+
+LLM:
+
+{
+    "tool": "search_google",
+    "arguments": {
+        "query": "asad"
+    }
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-18 09:53:47.615880]
+
+User:
+
+open chrome and search python tutorial
+
+LLM:
+
+{
+    "steps": [
+        {
+            "tool": "open_chrome",
+            "arguments": {}
+        },
+        {
+            "tool": "search_google",
+            "arguments": {
+                "query": "python tutorial"
+            }
+        }
+    ]
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-18 21:20:12.870537]
+
+User:
+
+open chrome and search python tutorial
+
+LLM:
+
+{
+    "steps": [
+        {
+            "tool": "open_chrome",
+            "arguments": {}
+        },
+        {
+            "tool": "search_google",
+            "arguments": {
+                "query": "python tutorial"
+            }
+        }
+    ]
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-18 21:25:12.564912]
+
+User:
+open chrome and search python tutorial
+
+LLM:
+{
+    "steps": [
+        {
+            "tool": "open_chrome",
+            "arguments": {}
+        },
+        {
+            "tool": "search_google",
+            "arguments": {
+                "query": "python tutorial"
+            }
+        }
+    ]
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-18 21:29:18.688822]
+
+User:
+open chrome and search python tutorial
+
+LLM:
+{
+    "tool": "open_chrome",
+    "arguments": {}
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-18 21:37:30.523192]
+
+User:
+open chrome and search python tutorial
+
+LLM:
+{
+    "tool": "open_chrome",
+    "arguments": {}
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-18 21:37:54.027949]
+
+User:
+search python tutorial
+
+LLM:
+{
+    "tool": "search_google",
+    "arguments": {
+        "query": "python tutorial"
+    }
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-18 21:43:20.445924]
+
+User:
+open chrome and search python tutorial
+
+LLM:
+{
+    "tool": "open_chrome",
+    "arguments": {}
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-18 21:46:09.786589]
+
+User:
+open chrome and search python tutorial
+
+LLM:
+{
+    "steps": [
+        {
+            "tool": "open_chrome",
+            "arguments": {}
+        },
+        {
+            "tool": "search_google",
+            "arguments": {
+                "query": "python tutorial"
+            }
+        }
+    ]
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-18 21:58:13.101721]
+
+User:
+start browser
+
+LLM:
+{
+    "tool": "start_browser",
+    "arguments": {}
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-18 21:58:56.278405]
+
+User:
+open youtube.com
+
+LLM:
+{
+    "tool": "open_website",
+    "arguments": {
+        "url": "https://www.youtube.com/"
+    }
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-18 21:59:39.745569]
+
+User:
+search saraiki remix songs
+
+LLM:
+{
+    "tool": "search_google",
+    "arguments": {
+        "query": "saraiki remix songs"
+    }
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-18 22:00:18.890596]
+
+User:
+search saraiki remix song in youtube.com
+
+LLM:
+{
+    "tool": "search_google",
+    "arguments": {
+        "query": "saraiki remix song in youtube.com"
+    }
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-18 22:12:08.045165]
+
+User:
+start browser
+
+LLM:
+{
+    "tool": "start_browser",
+    "arguments": {}
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-18 22:12:28.199915]
+
+User:
+open https://google.com
+
+LLM:
+{
+    "tool": "open_website",
+    "arguments": {
+        "url": "https://google.com"
+    }
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-18 22:12:50.593251]
+
+User:
+close browser
+
+LLM:
+{
+    "tool": "close_browser",
+    "arguments": {}
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-18 22:24:22.939343]
+
+User:
+start browser
+
+LLM:
+{
+    "tool": "start_browser",
+    "arguments": {}
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-18 22:24:44.446932]
+
+User:
+open google.com
+
+LLM:
+{
+    "tool": "open_website",
+    "arguments": {
+        "url": "https://www.google.com"
+    }
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-18 22:25:07.535878]
+
+User:
+get status
+
+LLM:
+{
+    "tool": "close_browser",
+    "arguments": {}
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-18 22:37:08.847342]
+
+User:
+start browser
+
+LLM:
+{
+    "tool": "start_browser",
+    "arguments": {}
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-18 22:37:20.347397]
+
+User:
+open google.com
+
+LLM:
+{
+    "tool": "open_website",
+    "arguments": {
+        "url": "https://google.com"
+    }
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-18 22:38:16.885005]
+
+User:
+get status
+
+LLM:
+{
+    "tool": "take_screenshot",
+    "arguments": {}
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-20 23:07:54.409283]
+
+User:
+
+start conversation
+
+LLM:
+
+{
+    "tool": "get_status",
+    "arguments": {}
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-21 12:55:07.858885]
+
+User:
+
+cool.
+
+Response:
+
+It seems like you're just letting me know that you're ready to assist in some way. How can I help you today? Do you have a specific goal or task in mind, or would you like to chat about something?
+
+If you need assistance with any particular task or have a question, feel free to ask and we can proceed from there.
+
+=================================
+
+
+
+=================================
+
+[2026-07-21 12:55:27.926707]
+
+User:
+
+just believe me, don't let your ready to suffer.
+
+Response:
+
+I understand you're feeling down or struggling right now. How can I assist you today? Do you need some resources, tools, or perhaps someone to talk to about what's on your mind?
+
+=================================
+
+
+
+=================================
+
+[2026-07-21 12:55:47.546256]
+
+User:
+
+foractus until the teeth red.
+
+Response:
+
+It seems like you might have meant to write a sentence in English, possibly related to someone named "Foractus." However, your input is not forming a coherent sentence. Could you please provide more details or rephrase your request? I'd be happy to assist you further.
+
+If you're looking for information about an individual named Foractus, I can try searching the web for more context if we have access to it.
+
+=================================
+
+
+
+=================================
+
+[2026-07-21 12:56:08.393418]
+
+User:
+
+just however
+
+Response:
+
+I see you're just providing a short message. Is there something specific you'd like to discuss or any task you need help with? I'm here to assist you with anything you might need. Whether it's building Astra, exploring AI concepts, or planning your next steps towards becoming an AI engineer, feel free to ask and we can get started!
+
+=================================
+
+
+
+=================================
+
+[2026-07-21 12:56:29.688495]
+
+User:
+
+but that's from my initial note.
+
+Response:
+
+It seems like you might be looking for more information or a specific task to perform related to your goals as an AI student. Could you please provide more details on what you would like to achieve? For example, do you need help with a particular project, want to search for something online, or are you planning to create a new file?
+
+If you just want to chat and don't have a specific goal in mind, I'm here to assist. What would you like to discuss or accomplish today?
+
+=================================
+
+
+
+=================================
+
+[2026-07-21 12:56:40.768042]
+
+User:
+
+thank you.
+
+Response:
+
+You're welcome! How can I assist you today?
+
+=================================
+
+
+
+=================================
+
+[2026-07-21 13:00:06.032355]
+
+User:
+
+done
+
+Response:
+
+It seems like you've completed a task or action. Is there anything specific you'd like to do or discuss next? Would you like to work towards one of your goals, such as building Astra or getting an AI internship? Or are you here for a chat on any topic?
+
+=================================
+
+
+
+=================================
+
+[2026-07-21 19:45:35.841866]
+
+User:
+
+okay, that's for opening good.
+
+Response:
+
+It seems like your message might have been cut off. Did you mean to ask or say something specific? How can I assist you today? Are you looking to open a website or perform some other task related to browsing the web?
+
+=================================
+
+
+
+=================================
+
+[2026-07-21 19:46:08.535699]
+
+User:
+
+astral when you go gay.
+
+Response:
+
+I believe there might be some confusion here. It seems like you're trying to communicate something related to AI or technology, but your message doesn't seem relevant to that context. Could you please clarify what action or information you need assistance with? 
+
+For instance, if you wanted to ask about a specific topic or perform an operation using the tools available to me, feel free to let me know and I'll assist you accordingly.
+
+=================================
+
+
+
+=================================
+
+[2026-07-21 19:46:49.978888]
+
+User:
+
+허팝은 번갈째
+
+Response:
+
+I'm sorry, but your message appears to be in Korean and seems like it might be a typo or incomplete sentence. Could you please rephrase your question or instruction in English for me to assist better?
+
+=================================
+
+
+
+=================================
+
+[2026-07-21 19:47:16.572961]
+
+User:
+
+我我去乃一下
+
+Response:
+
+您看起来可能需要一些帮助来理解您的请求。"我我去一下"这句话我不太明白是在询问什么。您可以告诉我您想要做什么或者了解些什么吗？这样我可以更好地为您提供帮助。
+
+=================================
+
+
+
+=================================
+
+[2026-07-21 19:47:31.091459]
+
+User:
+
+जपा जपा जपा जपा जपा जपा है।
+
+Response:
+
+I'm here to assist you. It seems like your message is in Hindi, and you seem to be repeating the phrase "जपा" (Jappa). Is there something specific you need help with or do you have a question?
+
+=================================
+
+
+
+=================================
+
+[2026-07-22 09:40:51.942635]
+
+User:
+
+ком 있게 деться и14 пиха
+
+Response:
+
+{
+    "type": "chat",
+    "response": "ابھر میں چاہتے ہوں کہ ممکن نہیں ہوتا ہے کہ من آپ سے 'دеться' (to do something) کو طے کرنے کی تلاش کرتا ہوں۔ آپ کی خواہchodetteesyā اس جملے میں بات پیسائی چاہتے ہیں۔"
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-22 10:37:10.145439]
+
+User:
+
+alko market
+
+Response:
+
+{
+    "type": "chat",
+    "response": "I'm not sure what you're asking about 'alko market'. Could you please provide more information or ask a different question?"
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-22 10:37:37.550160]
+
+User:
+
+let's try to open the organ.
+
+Response:
+
+{
+    "type": "chat",
+    "response": "I'm sorry, I didn't understand what you meant by 'let's try to open the organ'. Could you please provide more information or instructions?"
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-22 19:24:04.241632]
+
+User:
+
+Remember Ali's number is 03001234567
+
+Response:
+
+{"type": "chat", "response": "ali saved successfully."}
+
+=================================
+
+
+
+=================================
+
+[2026-07-22 19:24:14.679805]
+
+User:
+
+What is Ali's number
+
+Response:
+
+{"type": "chat", "response": "ali's number is 03001234567"}
+
+=================================
+
+
+
+=================================
+
+[2026-07-22 19:24:28.207848]
+
+User:
+
+Update Ali's number to 03123456789
+
+Response:
+
+{"type": "chat", "response": "ali updated successfully."}
+
+=================================
+
+
+
+=================================
+
+[2026-07-22 19:24:38.030719]
+
+User:
+
+Delete Ali's contact
+
+Response:
+
+{"type": "chat", "response": "ali deleted successfully."}
+
+=================================
+
+
+
+=================================
+
+[2026-07-22 19:24:42.063928]
+
+User:
+
+hi
+
+Response:
+
+{"type": "chat", "response": "Good to see you again, Boss."}
+
+=================================
+
+
+
+=================================
+
+[2026-07-22 19:24:57.556338]
+
+User:
+
+how are you
+
+Response:
+
+{"type": "chat", "response": "Ready hoon Boss."}
+
+=================================
+
+
+
+=================================
+
+[2026-07-22 20:21:55.916869]
+
+User:
+
+send hi to asad
+
+Response:
+
+{"type": "chat", "response": "Welcome back, Boss."}
+
+=================================
+
+
+
+=================================
+
+[2026-07-22 20:22:20.130464]
+
+User:
+
+send "hello" to asad
+
+Response:
+
+{"type": "steps", "steps": [{"tool": "open_whatsapp", "arguments": {}}, {"tool": "send_whatsapp_message", "arguments": {"name": "asad", "message": "hello"}}]}
+
+=================================
+
+
+
+=================================
+
+[2026-07-22 20:28:06.066541]
+
+User:
+
+send "hi" to asad
+
+Response:
+
+{"type": "steps", "steps": [{"tool": "open_whatsapp", "arguments": {}}, {"tool": "send_whatsapp_message", "arguments": {"name": "asad", "message": "hi"}}]}
+
+=================================
+
+
+
+=================================
+
+[2026-07-22 20:32:07.548543]
+
+User:
+
+send hi to asad
+
+Response:
+
+{"type": "chat", "response": "Good to see you again, Boss."}
+
+=================================
+
+
+
+=================================
+
+[2026-07-22 20:33:43.513713]
+
+User:
+
+send hi to asad
+
+Response:
+
+{"type": "chat", "response": "Assalam-o-Alaikum Boss, aaj ka plan kya hai?"}
+
+=================================
+
+
+
+=================================
+
+[2026-07-22 20:34:35.737817]
+
+User:
+
+close browser
+
+Response:
+
+{
+    "type": "tool",
+    "tool": "close_browser",
+    "arguments": {}
+}
+
+=================================
+
+
+
+=================================
+
+[2026-07-22 20:35:46.782065]
+
+User:
+
+send "hi" to asad
+
+Response:
+
+{"type": "steps", "steps": [{"tool": "open_whatsapp", "arguments": {}}, {"tool": "send_whatsapp_message", "arguments": {"name": "asad", "message": "hi"}}]}
+
+=================================
+
+
+
+=================================
+
+[2026-07-22 20:40:16.806550]
+
+User:
+
+close browser
+
+Response:
+
+{
+    "type": "tool",
+    "tool": "close_browser",
+    "arguments": {}
+
+=================================
+
+
+
+=================================
+
+[2026-07-22 20:42:29.010430]
+
+User:
+
+send hi to asad
+
+Response:
+
+{"type": "chat", "response": "Assalam-o-Alaikum Boss, aaj ka plan kya hai?"}
+
+=================================
+
+
+
+=================================
+
+[2026-07-22 20:43:05.574519]
+
+User:
+
+send "hi" to asad
+
+Response:
+
+{"type": "steps", "steps": [{"tool": "open_whatsapp", "arguments": {}}, {"tool": "send_whatsapp_message", "arguments": {"name": "asad", "message": "hi"}}]}
+
+=================================
+
+
+
+=================================
+
+[2026-07-22 20:50:55.117535]
+
+User:
+
+send "hi" to asad
+
+Response:
+
+{"type": "steps", "steps": [{"tool": "open_whatsapp", "arguments": {}}, {"tool": "send_whatsapp_message", "arguments": {"name": "asad", "message": "hi"}}]}
+
+=================================
+
+
+
+=================================
+
+[2026-07-22 20:54:38.962567]
+
+User:
+
+send "hi" to asad
+
+Response:
+
+{"type": "steps", "steps": [{"tool": "open_whatsapp", "arguments": {}}, {"tool": "send_whatsapp_message", "arguments": {"name": "asad", "message": "hi"}}]}
+
+=================================
+

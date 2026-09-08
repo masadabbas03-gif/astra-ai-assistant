@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+html,
+body,
+[class*="css"] {
+    font-family: "Inter", sans-serif;
+}
+
+html,
+body,
+.stApp {
+    background: #050b16;
+    color: white;
+    overflow-y: auto;
+}
+
+/* Sidebar */
+
+section[data-testid="stSidebar"] {
+    background: linear-gradient(
+        180deg,
+        #0d1422,
+        #111827
+    );
+    width: 320px !important;
+    min-width: 320px !important;
+    border-right: 1px solid rgba(
+        255,
+        255,
+        255,
+        0.08
+    );
+}
+
+section[data-testid="stSidebar"] * {
+    color: white !important;
+}
+
+/* Main area */
+
+.main .block-container {
+    padding-top: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 140px;
+    max-width: 100%;
+}
+
+/* Heading */
+
+.main-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #9ca3af;
+    margin-bottom: 30px;
+}
+
+/* Cards */
+
+.card {
+    background: rgba(
+        255,
+        255,
+        255,
+        0.06
+    );
+
+    backdrop-filter: blur(14px);
+
+    border: 1px solid rgba(
+        255,
+        255,
+        255,
+        0.08
+    );
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+
+    border-color: rgba(
+        99,
+        102,
+        241,
+        0.5
+    );
+}
+
+.card-title {
+    color: #9ca3af;
+    font-size: 14px;
+}
+
+.card-value {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+/* Chat message */
+
+.chat-box {
+    background: rgba(
+        255,
+        255,
+        255,
+        0.05
+    );
+
+    border: 1px solid rgba(
+        255,
+        255,
+        255,
+        0.06
+    );
+
+    border-radius: 18px;
+
+    padding: 18px;
+
+    margin-top: 30px;
+
+    margin-bottom: 25px;
+}
+
+/* Input */
+
+.stChatInput {
+    position: fixed;
+    bottom: 20px;
+    left: 360px;
+    right: 40px;
+    z-index: 999;
+}
+
+.stChatInput > div {
+    background: #111827;
+    border-radius: 18px;
+    border: 1px solid rgba(
+        255,
+        255,
+        255,
+        0.08
+    );
+}
+
+/* Buttons */
+
+.stButton button {
+    width: 100%;
+    border-radius: 12px;
+    background: #1f2937;
+    color: white;
+    border: none;
+    padding: 12px;
+}
+
+.stButton button:hover {
+    background: #374151;
+}
+
+/* Scroll bar */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #374151;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
