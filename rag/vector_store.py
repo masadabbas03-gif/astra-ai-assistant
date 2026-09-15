@@ -4,9 +4,7 @@ import numpy as np
 from rag.load_index import load_index
 
 
-memory_texts = []
-
-index = load_index()
+index, memory_texts = load_index()
 
 
 def add_to_memory(

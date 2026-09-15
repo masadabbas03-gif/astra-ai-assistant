@@ -208,19 +208,16 @@ TOOLS = {
  
  "open_whatsapp": {
 
-    "function": open_website,
+    "function": open_whatsapp,
 
     "description": "Open WhatsApp Web",
 
     "category": "browser",
 
-    "parameters": [
-
-        "https://web.whatsapp.com"
-
-    ]
+    "parameters": []
 
  },
+
  
  "send_email": {
 

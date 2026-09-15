@@ -4,8 +4,9 @@ def get_paid_students(students):
 
     for student in students:
 
-        if student["fee_paid"].lower() == "yes":
+        if str(student.get("fee_paid", "")).strip().lower() == "yes":
 
             paid_students.append(student)
 
     return paid_students
+

@@ -1,7 +1,7 @@
-name,father_name,email,phone,address
+name,father_name,email,phone,address,fee_paid
 
-Ali,Ahmed,ali@gmail.com,03001234567,Lahore
+Ali,Ahmed,ali@gmail.com,03001234567,Lahore,yes
 
-Hamza,Tariq,hamza@gmail.com,03111222333,Karachi
+Hamza,Tariq,hamza@gmail.com,03111222333,Karachi,no
 
-Usman,Khalid,usman@gmail.com,03222333444,Islamabad
+Usman,Khalid,usman@gmail.com,03222333444,Islamabad,yes

@@ -23,3 +23,8 @@ def load_memory(filename):
     ) as file:
 
         return json.load(file)
+
+
+def load_tasks():
+    tasks = load_memory("tasks.json")
+    return tasks if isinstance(tasks, list) else []

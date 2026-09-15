@@ -1,55 +1,23 @@
-import faiss
+import os
 import json
-
-from rag.vector_store import (
-
-    memory_texts
-
-)
+import faiss
 
 
 def load_index():
+    index_path = "memory/faiss.index"
+    memory_path = "memory/vector_memory.json"
 
     try:
+        index = faiss.read_index(index_path)
+    except Exception:
+        index = faiss.IndexFlatL2(384)
 
-        index = faiss.read_index(
+    texts = []
+    if os.path.exists(memory_path):
+        try:
+            with open(memory_path, "r", encoding="utf-8") as file:
+                texts = json.load(file)
+        except Exception:
+            texts = []
 
-            "memory/faiss.index"
-
-        )
-
-    except:
-
-        index = faiss.IndexFlatL2(
-
-            384
-
-        )
-
-    try:
-
-        with open(
-
-            "memory/vector_memory.json",
-
-            "r",
-
-            encoding="utf-8"
-
-        ) as file:
-
-            memory_texts.extend(
-
-                json.load(
-
-                    file
-
-                )
-
-            )
-
-    except:
-
-        pass
-
-    return index
+    return index, texts

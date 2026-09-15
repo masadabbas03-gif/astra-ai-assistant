@@ -1,6 +1,6 @@
 import webbrowser
+import subprocess
 from agent.state import state
-import os
 
 
 def open_chrome():
@@ -29,24 +29,22 @@ def get_status():
     return state
 
 
-
-
 def open_notepad():
 
-    os.system("notepad")
+    subprocess.Popen("notepad", shell=True)
 
     return "Notepad opened."
 
 
 def open_calculator():
 
-    os.system("calc")
+    subprocess.Popen("calc", shell=True)
 
     return "Calculator opened."
 
 
 def open_vscode():
 
-    os.system("code")
+    subprocess.Popen("code", shell=True)
 
-    return "VS Code opened."
+    return "VS Code opened."

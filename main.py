@@ -334,13 +334,17 @@ Response:
 
                 )
 
-                result = execute_tool(
+                if isinstance(arguments, dict):
+                    result = execute_tool(
+                        tool_name,
+                        **arguments
+                    )
+                else:
+                    result = execute_tool(
+                        tool_name,
+                        *arguments
+                    )
 
-                    tool_name,
-
-                    *arguments.values()
-
-                )
 
                 add_message(
 
@@ -410,13 +414,17 @@ Response:
 
             )
 
-            result = execute_tool(
+            if isinstance(arguments, dict):
+                result = execute_tool(
+                    tool_name,
+                    **arguments
+                )
+            else:
+                result = execute_tool(
+                    tool_name,
+                    *arguments
+                )
 
-                tool_name,
-
-                *arguments.values()
-
-            )
 
             add_message(
 
