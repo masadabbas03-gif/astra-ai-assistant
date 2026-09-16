@@ -1,6 +1,6 @@
 # LinkedIn Job Search & CV Curation Report: junior ai/ml engineer
 
-- **Generated At**: 2026-09-16 04:58 PM
+- **Generated At**: 2026-09-16 05:08 PM
 - **Candidate Name**: Muhammad Assad Abbas
 - **Candidate Role**: AI Engineer & Python Developer
 - **Target Location**: Remote

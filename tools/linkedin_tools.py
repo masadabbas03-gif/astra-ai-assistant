@@ -267,11 +267,21 @@ def search_linkedin_jobs(keywords=None, location=None, limit=10):
         now_str = datetime.now().strftime("%Y-%m-%d %I:%M %p")
 
         # =======================================================
-        # Step 2: Save to a neat CSV / Excel file
+        # Step 2: Save directly to Laptop (Desktop and Downloads)
         # =======================================================
-        csv_filename = f"linkedin_jobs_{safe_kw}.csv"
-        csv_path = os.path.join("reports", csv_filename)
-        latest_csv_path = os.path.join("reports", "curated_jobs_matching_cv.csv")
+        user_home = os.path.expanduser("~")
+        desktop_dir = os.path.join(user_home, "Desktop")
+        downloads_dir = os.path.join(user_home, "Downloads")
+
+        laptop_paths = []
+        if os.path.exists(desktop_dir):
+            laptop_paths.append(os.path.join(desktop_dir, f"linkedin_jobs_{safe_kw}.csv"))
+            laptop_paths.append(os.path.join(desktop_dir, "curated_jobs_matching_cv.csv"))
+        if os.path.exists(downloads_dir):
+            laptop_paths.append(os.path.join(downloads_dir, "curated_jobs_matching_cv.csv"))
+
+        if not laptop_paths:
+            laptop_paths.append(os.path.join(user_home, "curated_jobs_matching_cv.csv"))
 
         fieldnames = [
             "Rank",
@@ -286,8 +296,43 @@ def search_linkedin_jobs(keywords=None, location=None, limit=10):
             "Extracted Date"
         ]
 
-        for target_path in [csv_path, latest_csv_path]:
-            with open(target_path, mode="w", newline="", encoding="utf-8-sig") as cf:
+        # Save to Laptop locations
+        for target_path in laptop_paths:
+            try:
+                with open(target_path, mode="w", newline="", encoding="utf-8-sig") as cf:
+                    writer = csv.DictWriter(cf, fieldnames=fieldnames)
+                    writer.writeheader()
+                    for j in curated_jobs:
+                        writer.writerow({
+                            "Rank": j["rank"],
+                            "Job Title": j["title"],
+                            "Company": j["company"],
+                            "Location": j["location"],
+                            "Match Score (%)": f"{j['match_score']}%",
+                            "Matched Skills": j["matched_skills"],
+                            "Easy Apply": j["easy_apply"],
+                            "Job URL": j["url"],
+                            "Status": j["status"],
+                            "Extracted Date": now_str
+                        })
+            except Exception as e:
+                print(f"[CSV Warning] Could not save to {target_path}: {e}")
+
+        # Save internal JSON cache for interactive apply / review tools (Step 3)
+        cache_path = os.path.join("reports", "latest_curated_jobs.json")
+        with open(cache_path, "w", encoding="utf-8") as jf:
+            json.dump({
+                "keywords": keywords,
+                "location": location,
+                "extracted_at": now_str,
+                "cv_used": cv.get("name", "User"),
+                "jobs": curated_jobs
+            }, jf, indent=4)
+
+        # Also keep a local copy in reports/
+        local_csv = os.path.join("reports", "curated_jobs_matching_cv.csv")
+        try:
+            with open(local_csv, mode="w", newline="", encoding="utf-8-sig") as cf:
                 writer = csv.DictWriter(cf, fieldnames=fieldnames)
                 writer.writeheader()
                 for j in curated_jobs:
@@ -303,17 +348,8 @@ def search_linkedin_jobs(keywords=None, location=None, limit=10):
                         "Status": j["status"],
                         "Extracted Date": now_str
                     })
-
-        # Save JSON cache for interactive apply / review tools (Step 3)
-        cache_path = os.path.join("reports", "latest_curated_jobs.json")
-        with open(cache_path, "w", encoding="utf-8") as jf:
-            json.dump({
-                "keywords": keywords,
-                "location": location,
-                "extracted_at": now_str,
-                "cv_used": cv.get("name", "User"),
-                "jobs": curated_jobs
-            }, jf, indent=4)
+        except Exception:
+            pass
 
         # Save to Markdown report
         md_filename = f"linkedin_jobs_{safe_kw}.md"
@@ -326,7 +362,7 @@ def search_linkedin_jobs(keywords=None, location=None, limit=10):
             rf.write(f"- **Target Location**: {location}\n")
             rf.write(f"- **Total Found on Page**: {total_found}\n")
             rf.write(f"- **Top Curated Matches**: {len(curated_jobs)}\n")
-            rf.write(f"- **Excel / CSV Export**: [{csv_filename}]({csv_filename})\n\n")
+            rf.write(f"- **Saved on Laptop Desktop**: `{laptop_paths[0]}`\n\n")
             rf.write("## Top 10 Curated Job Openings Matching CV\n\n")
 
             for j in curated_jobs:
@@ -342,7 +378,7 @@ def search_linkedin_jobs(keywords=None, location=None, limit=10):
         spoken_summary = (
             f"{nickname}, I curated the top {len(curated_jobs)} jobs matching your CV for {keywords}. "
             f"Top match is {top_match['title']} at {top_match['company']} with {top_match['match_score']}% relevance. "
-            f"I have saved all top {len(curated_jobs)} jobs to a neat CSV file and markdown report."
+            f"I have saved the CSV file directly onto your laptop Desktop!"
         )
         speak(spoken_summary)
 
@@ -365,8 +401,11 @@ def search_linkedin_jobs(keywords=None, location=None, limit=10):
 
         output_lines.append("-" * 95)
         output_lines.append("")
-        output_lines.append(f"-> Neat CSV File (Excel compatible): {csv_path}")
-        output_lines.append(f"-> Latest Master CSV: {latest_csv_path}")
+        output_lines.append(f"-> Saved on your Laptop Desktop: {laptop_paths[0]}")
+        if len(laptop_paths) > 1:
+            output_lines.append(f"-> Master CSV on Desktop: {laptop_paths[1]}")
+        if len(laptop_paths) > 2:
+            output_lines.append(f"-> Also in Downloads: {laptop_paths[2]}")
         output_lines.append(f"-> Detailed Markdown Report: {md_path}")
         output_lines.append("")
         output_lines.append("Step 3: To view or Easy Apply, say 'open job 1' or 'apply to job 1'.")
