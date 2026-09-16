@@ -159,7 +159,15 @@ def search_linkedin_jobs(keywords=None, location=None, limit=10):
     try:
         page = get_browser_page()
         try:
+            page.bring_to_front()
+        except Exception:
+            pass
+        try:
             page.goto(search_url, wait_until="commit", timeout=35000)
+        except Exception:
+            pass
+        try:
+            page.bring_to_front()
         except Exception:
             pass
 
@@ -468,7 +476,15 @@ def open_linkedin_job(job_index=1, click_easy_apply=False, auto_fill_steps=True)
         print(f"\n[LinkedIn] Opening Job #{job_index}: {title} at {company}")
         page = get_browser_page()
         try:
+            page.bring_to_front()
+        except Exception:
+            pass
+        try:
             page.goto(job_url, wait_until="domcontentloaded", timeout=45000)
+        except Exception:
+            pass
+        try:
+            page.bring_to_front()
         except Exception:
             pass
 

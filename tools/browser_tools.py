@@ -14,38 +14,42 @@ def start_browser():
     global browser
     global page
 
-    if state["browser_running"]:
-
+    if state["browser_running"] and page is not None:
         return "Browser already running."
 
-    profile_path = os.path.abspath(
-
-        "browser_profile"
-
-    )
-
+    profile_path = os.path.abspath("browser_profile")
+    os.makedirs(profile_path, exist_ok=True)
     playwright = sync_playwright().start()
 
-    browser = playwright.chromium.launch_persistent_context(
-
-        user_data_dir=profile_path,
-
-        headless=False
-
-    )
+    # Launch real Google Chrome maximized and visible on user's desktop
+    try:
+        browser = playwright.chromium.launch_persistent_context(
+            user_data_dir=profile_path,
+            channel="chrome",
+            headless=False,
+            no_viewport=True,
+            args=["--start-maximized", "--disable-blink-features=AutomationControlled"]
+        )
+    except Exception:
+        browser = playwright.chromium.launch_persistent_context(
+            user_data_dir=profile_path,
+            headless=False,
+            no_viewport=True,
+            args=["--start-maximized"]
+        )
 
     pages = browser.pages
-
     if pages:
-
         page = pages[0]
-
     else:
-
         page = browser.new_page()
 
-    state["browser_running"] = True
+    try:
+        page.bring_to_front()
+    except Exception:
+        pass
 
+    state["browser_running"] = True
     return "Browser started."
 
 
@@ -65,29 +69,29 @@ def open_website(url):
         start_browser()
 
     page.goto(
-
-
         url,
-
         wait_until="domcontentloaded",
-
         timeout=120000
-
     )
+    try:
+        page.bring_to_front()
+    except Exception:
+        pass
 
     state["current_website"] = url
-
     return f"Opened {url}"
 
+
 def search_google(query):
-
     global page
-
     if page is None:
-
         start_browser()
 
     page.goto(f"https://www.google.com/search?q={query}")
+    try:
+        page.bring_to_front()
+    except Exception:
+        pass
 
     return f"Searching for {query}"
 
