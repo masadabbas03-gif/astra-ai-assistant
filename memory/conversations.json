@@ -50,5 +50,9 @@
     {
         "user": "send hi to asad",
         "assistant": "Assalam-o-Alaikum Boss, aaj ka plan kya hai?"
+    },
+    {
+        "user": "Assalam-o-Alaikum Astra, kya haal hai?",
+        "assistant": "Ready hoon Boss."
     }
 ]
