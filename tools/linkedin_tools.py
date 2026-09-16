@@ -371,13 +371,79 @@ def search_linkedin_jobs(keywords=None, location=None, limit=10):
         return err_msg
 
 
-def open_linkedin_job(job_index=1, click_easy_apply=False):
+def fill_easy_apply_steps(page, cv):
+    """
+    Helper to detect common fields in the LinkedIn Easy Apply modal,
+    pre-fill phone, CV attachment, and advance through 'Next' steps
+    until reaching the final 'Review' screen.
+    """
+    profile = load_profile()
+    phone = profile.get("phone", "03001234567")
+    actions_taken = []
+
+    # Iterate up to 5 steps safely
+    for step in range(5):
+        page.wait_for_timeout(1500)
+
+        # 1. Phone number field
+        try:
+            phone_inputs = page.locator("input[type='tel'], input[id*='phone'], input[name*='phoneNumber'], input[aria-label*='Phone']")
+            if phone_inputs.count() > 0:
+                first_phone = phone_inputs.first
+                curr_val = first_phone.input_value().strip()
+                if not curr_val:
+                    first_phone.fill(phone)
+                    actions_taken.append(f"Pre-filled phone: {phone}")
+        except Exception:
+            pass
+
+        # 2. File Upload for CV/Resume
+        try:
+            file_inputs = page.locator("input[type='file']")
+            if file_inputs.count() > 0:
+                for cand_path in ["data/cv.pdf", "data/resume.pdf", "data/cv.txt"]:
+                    if os.path.exists(cand_path):
+                        file_inputs.first.set_input_files(os.path.abspath(cand_path))
+                        actions_taken.append(f"Attached CV: {cand_path}")
+                        break
+        except Exception:
+            pass
+
+        # 3. Check for Review button (Reached final step)
+        try:
+            review_btn = page.locator("button[aria-label*='Review your application'], button:has-text('Review')")
+            if review_btn.count() > 0 and review_btn.first.is_visible() and review_btn.first.is_enabled():
+                review_btn.first.click()
+                actions_taken.append("Advanced to final Review screen.")
+                page.wait_for_timeout(1500)
+                break
+        except Exception:
+            pass
+
+        # 4. Check for Next button
+        try:
+            next_btn = page.locator("button[aria-label*='Continue to next step'], button:has-text('Next')")
+            if next_btn.count() > 0 and next_btn.first.is_visible() and next_btn.first.is_enabled():
+                next_btn.first.click()
+                actions_taken.append(f"Advanced step {step + 1}")
+                page.wait_for_timeout(1500)
+            else:
+                break
+        except Exception:
+            break
+
+    return actions_taken
+
+
+def open_linkedin_job(job_index=1, click_easy_apply=False, auto_fill_steps=True):
     """
     Step 3: Opens a specific job page from the top 10 curated list in the browser,
-    or clicks "Easy Apply" with user confirmation before final submission.
+    or clicks "Easy Apply", pre-fills inputs, and pauses with user confirmation
+    before final submission.
     """
     profile = load_profile()
     nickname = profile.get("nickname", "Boss")
+    cv = load_cv_profile()
     cache_path = os.path.join("reports", "latest_curated_jobs.json")
 
     if not os.path.exists(cache_path):
@@ -409,24 +475,31 @@ def open_linkedin_job(job_index=1, click_easy_apply=False):
         page.wait_for_timeout(3000)
 
         # Check for Easy Apply button
-        easy_apply_btn = page.locator("button.jobs-apply-button, button:has-text('Easy Apply'), button[aria-label*='Easy Apply']").first
+        easy_apply_btn = page.locator("button.jobs-apply-button, button:has-text('Easy Apply'), button[aria-label*='Easy Apply']")
         has_easy_apply = easy_apply_btn.count() > 0
 
         if click_easy_apply and has_easy_apply:
             try:
-                easy_apply_btn.click()
+                easy_apply_btn.first.click()
                 page.wait_for_timeout(2000)
             except Exception as e:
                 print(f"[LinkedIn] Could not click Easy Apply automatically: {e}")
 
-            spoken_msg = f"{nickname}, I opened the Easy Apply application for {title} at {company}. Please review and confirm before submitting."
+            actions = []
+            if auto_fill_steps:
+                actions = fill_easy_apply_steps(page, cv)
+
+            spoken_msg = f"{nickname}, I opened Easy Apply for {title} at {company} and pre-filled your details. Please review and confirm before submitting."
             speak(spoken_msg)
 
+            actions_str = "\n".join(f"- {a}" for a in actions) if actions else "- Opened Easy Apply modal"
+
             return (
-                f"=== Easy Apply Opened: Job #{job_index} ===\n"
+                f"=== Easy Apply Processed: Job #{job_index} ===\n"
                 f"Title: {title}\n"
                 f"Company: {company}\n"
-                f"Status: Waiting for user confirmation before final submission.\n"
+                f"Automated Steps:\n{actions_str}\n"
+                f"Status: Reached review stage. Waiting for user confirmation before final submission.\n"
                 f"Job URL: {job_url}\n"
                 f"\n[Safety Confirmation Required]: Astra will not auto-submit your application without your direct confirmation."
             )
@@ -447,5 +520,175 @@ def open_linkedin_job(job_index=1, click_easy_apply=False):
 
     except Exception as e:
         err_msg = f"Error opening job #{job_index}: {e}"
+        print(f"\n[LinkedIn Error] {err_msg}")
+        return err_msg
+
+
+def create_linkedin_post(text=None, project_name=None, auto_publish=False):
+    """
+    Drafts and creates a professional post on LinkedIn about a project or custom announcement.
+    """
+    profile = load_profile()
+    nickname = profile.get("nickname", "Boss")
+    cv = load_cv_profile()
+
+    if not text:
+        if not project_name:
+            project_name = "Astra AI Automation Agent"
+        text = (
+            f"🚀 Excited to introduce my latest project: {project_name}!\n\n"
+            "I developed an autonomous agentic AI system capable of multi-step task execution, "
+            "browser automation with Playwright, and intelligent CV-matched job curation.\n\n"
+            "Key Highlights:\n"
+            "⚡ Autonomous Multi-step Tool Planning & Execution\n"
+            "🗣️ Real-time Neural Voice Assistant with Piper TTS\n"
+            "💼 Intelligent Job Curation & Excel Export based on CV Stack\n"
+            "🛠️ Tech Stack: Python, Playwright, LLM Orchestration, Vector RAG\n\n"
+            "Always open to feedback and connecting with fellow AI builders!\n\n"
+            "#ArtificialIntelligence #Python #MachineLearning #AIAgents #Automation #Playwright #Developer"
+        )
+
+    print(f"\n[LinkedIn] Navigating to LinkedIn feed: https://www.linkedin.com/feed/")
+    try:
+        page = get_browser_page()
+        page.goto("https://www.linkedin.com/feed/", wait_until="domcontentloaded", timeout=45000)
+        page.wait_for_timeout(3500)
+
+        # Check login
+        if "login" in page.url or page.locator("input#username, input#session_key").count() > 0:
+            msg = f"{nickname}, please log into your LinkedIn account in the opened browser window first."
+            speak(msg)
+            return msg
+
+        # Click Start a post button
+        start_post_btn = page.locator(
+            "button.share-box-feed-entry__trigger, "
+            "button:has-text('Start a post'), "
+            "div.share-box-feed-entry__trigger, "
+            "button[aria-label*='Start a post']"
+        )
+
+        if start_post_btn.count() == 0:
+            msg = "Could not locate 'Start a post' button. Please ensure you are logged in."
+            speak(f"{nickname}, I couldn't find the post button on LinkedIn.")
+            return msg
+
+        start_post_btn.first.click()
+        page.wait_for_timeout(2000)
+
+        # Fill text editor
+        editor = page.locator("div.ql-editor[contenteditable='true'], div[role='textbox'][aria-label*='post'], div.editor-content")
+        if editor.count() == 0:
+            editor = page.locator("div[contenteditable='true']")
+
+        if editor.count() > 0:
+            editor.first.click()
+            editor.first.fill(text)
+            page.wait_for_timeout(1000)
+
+        if auto_publish:
+            post_btn = page.locator("button.share-actions__primary-action, button:has-text('Post')")
+            if post_btn.count() > 0 and post_btn.first.is_enabled():
+                post_btn.first.click()
+                page.wait_for_timeout(2500)
+                speak(f"{nickname}, your post has been published to LinkedIn!")
+                return f"LinkedIn post published successfully!\n\nContent:\n{text}"
+            else:
+                speak(f"{nickname}, I drafted the post in your browser. Please click Post.")
+                return f"Post drafted in browser. Ready to publish.\n\nContent:\n{text}"
+        else:
+            speak(f"{nickname}, I drafted your project post on LinkedIn. Please review it in your browser and click Post.")
+            return (
+                f"=== LinkedIn Post Drafted in Browser ===\n\n"
+                f"{text}\n\n"
+                f"[Review Required]: Please review the drafted post in your browser window and click 'Post' to publish."
+            )
+
+    except Exception as e:
+        err_msg = f"Error creating LinkedIn post: {e}"
+        print(f"\n[LinkedIn Error] {err_msg}")
+        return err_msg
+
+
+def update_linkedin_profile(headline=None, about=None, auto_save=True):
+    """
+    Updates your LinkedIn profile headline or about description.
+    """
+    profile = load_profile()
+    nickname = profile.get("nickname", "Boss")
+    cv = load_cv_profile()
+
+    if not headline and not about:
+        headline = f"{cv.get('profession', 'AI Engineer')} | Python & Agentic AI Specialist"
+
+    print(f"\n[LinkedIn] Navigating to profile: https://www.linkedin.com/in/me/")
+    try:
+        page = get_browser_page()
+        page.goto("https://www.linkedin.com/in/me/", wait_until="domcontentloaded", timeout=45000)
+        page.wait_for_timeout(3500)
+
+        # Check login
+        if "login" in page.url or page.locator("input#username, input#session_key").count() > 0:
+            msg = f"{nickname}, please log into LinkedIn in the browser first."
+            speak(msg)
+            return msg
+
+        updates_made = []
+
+        # 1. Update Headline
+        if headline:
+            edit_intro_btn = page.locator(
+                "button[aria-label*='Edit intro'], "
+                "button.artdeco-button--tertiary:has([data-test-icon='pencil-medium']), "
+                "button:has-text('Edit intro')"
+            )
+
+            if edit_intro_btn.count() > 0:
+                edit_intro_btn.first.click()
+                page.wait_for_timeout(2500)
+
+                headline_input = page.locator("input[id*='headline'], textarea[id*='headline'], input[name='headline'], textarea[name='headline']")
+                if headline_input.count() > 0:
+                    headline_input.first.fill("")
+                    headline_input.first.fill(headline)
+                    updates_made.append(f"Headline updated to: '{headline}'")
+
+                    if auto_save:
+                        save_btn = page.locator("button:has-text('Save'), button[data-view-name='profile-form-save']")
+                        if save_btn.count() > 0:
+                            save_btn.first.click()
+                            page.wait_for_timeout(2500)
+                            updates_made.append("Headline saved successfully.")
+            else:
+                updates_made.append("Could not locate 'Edit intro' pencil icon on profile.")
+
+        # 2. Update About Section
+        if about:
+            edit_about_btn = page.locator("button[aria-label*='Edit about'], div#about ~ * button[aria-label*='Edit']")
+            if edit_about_btn.count() > 0:
+                edit_about_btn.first.click()
+                page.wait_for_timeout(2000)
+
+                about_input = page.locator("textarea[id*='summary'], textarea[name='summary'], textarea[aria-label*='About']")
+                if about_input.count() > 0:
+                    about_input.first.fill("")
+                    about_input.first.fill(about)
+                    updates_made.append("About section updated.")
+
+                    if auto_save:
+                        save_btn = page.locator("button:has-text('Save')")
+                        if save_btn.count() > 0:
+                            save_btn.first.click()
+                            page.wait_for_timeout(2000)
+                            updates_made.append("About saved successfully.")
+            else:
+                updates_made.append("Could not locate 'Edit about' pencil icon on profile.")
+
+        summary_text = "\n".join(updates_made) if updates_made else "No profile updates could be applied."
+        speak(f"{nickname}, I processed your LinkedIn profile update.")
+        return f"=== LinkedIn Profile Update Result ===\n{summary_text}"
+
+    except Exception as e:
+        err_msg = f"Error updating LinkedIn profile: {e}"
         print(f"\n[LinkedIn Error] {err_msg}")
         return err_msg

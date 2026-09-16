@@ -51,7 +51,12 @@ from startup.manage_startup import (
     disable_windows_startup,
     check_startup_status
 )
-from tools.linkedin_tools import search_linkedin_jobs, open_linkedin_job
+from tools.linkedin_tools import (
+    search_linkedin_jobs,
+    open_linkedin_job,
+    create_linkedin_post,
+    update_linkedin_profile
+)
 
 
 
@@ -559,7 +564,28 @@ TOOLS = {
         "category": "browser",
         "parameters": [
             {"name": "job_index", "type": "integer"},
-            {"name": "click_easy_apply", "type": "boolean"}
+            {"name": "click_easy_apply", "type": "boolean"},
+            {"name": "auto_fill_steps", "type": "boolean"}
+        ],
+    },
+    "create_linkedin_post": {
+        "function": create_linkedin_post,
+        "description": "Creates and drafts or publishes a post on LinkedIn about a project or custom topic",
+        "category": "browser",
+        "parameters": [
+            {"name": "text", "type": "string"},
+            {"name": "project_name", "type": "string"},
+            {"name": "auto_publish", "type": "boolean"}
+        ],
+    },
+    "update_linkedin_profile": {
+        "function": update_linkedin_profile,
+        "description": "Updates your LinkedIn profile headline or about description automatically",
+        "category": "browser",
+        "parameters": [
+            {"name": "headline", "type": "string"},
+            {"name": "about", "type": "string"},
+            {"name": "auto_save", "type": "boolean"}
         ],
     },
 }
