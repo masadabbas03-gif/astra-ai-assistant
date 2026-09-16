@@ -6,4 +6,6 @@ venv/
 .DS_Store
 node_modules/
 *.wav
-reports/*.png
+reports/*.png
+browser_profile/
+

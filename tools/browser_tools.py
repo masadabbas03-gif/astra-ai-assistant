@@ -49,15 +49,23 @@ def start_browser():
     return "Browser started."
 
 
+def get_browser_page():
+    global page
+    if page is None:
+        start_browser()
+    return page
+
+
 def open_website(url):
 
     global page
 
     if page is None:
 
-        return "Browser not started."
+        start_browser()
 
     page.goto(
+
 
         url,
 

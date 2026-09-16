@@ -51,6 +51,8 @@ from startup.manage_startup import (
     disable_windows_startup,
     check_startup_status
 )
+from tools.linkedin_tools import search_linkedin_jobs, open_linkedin_job
+
 
 
 TOOLS = {
@@ -541,4 +543,24 @@ TOOLS = {
         "category": "system",
         "parameters": [],
     },
+    "search_linkedin_jobs": {
+        "function": search_linkedin_jobs,
+        "description": "Searches and curates top 10 most relevant jobs matching CV from LinkedIn, computes match scores, and saves to neat CSV and Markdown files",
+        "category": "browser",
+        "parameters": [
+            {"name": "keywords", "type": "string"},
+            {"name": "location", "type": "string"},
+            {"name": "limit", "type": "integer"}
+        ],
+    },
+    "open_linkedin_job": {
+        "function": open_linkedin_job,
+        "description": "Opens a curated LinkedIn job page from the top 10 list by rank number (1-10) in the browser, and optionally clicks Easy Apply with user confirmation before submission",
+        "category": "browser",
+        "parameters": [
+            {"name": "job_index", "type": "integer"},
+            {"name": "click_easy_apply", "type": "boolean"}
+        ],
+    },
 }
+

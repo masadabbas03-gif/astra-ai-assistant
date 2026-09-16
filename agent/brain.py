@@ -445,17 +445,8 @@ def think(user_input):
 
         )
 
-    if (
+    if re.search(r"\b(hello|hi|hey|assalamualaikum|assalam o alaikum)\b", text):
 
-        "hello" in text
-
-        or "hi" in text
-
-        or "assalamualaikum" in text
-
-        or "assalam o alaikum" in text
-
-    ):
 
         return json.dumps(
 
